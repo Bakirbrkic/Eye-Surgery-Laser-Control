@@ -1,0 +1,46 @@
+===Verzija 1===
+
+UI
+	front: HTML
+
+	back: apache2 (xamp/wamp/lamp) serves only GUI
+
+Embedded software:
+	Inputs: another webServer written in C (ko arduino) "WiringPi" compactible that listens for http requests or has open sockets for sliders on/of etc...
+
+	Calculations: zadnje
+
+	Outputs: 6 pins that are controlled by the "WiringPi" state is changed in webServer request handler functions 
+
+
+==Verzija 2==
+
+	Single web server apache2 (xamp/wamp/lamp):
+		- serves GUI
+
+		- handles inputs by executing C code when HTTP request is recieved (probably from PHP scripts)
+
+	Calculations: last
+
+	Outputs: C scripts "WiringPi"
+
+==============================
+// za provjeriti:
+
+	koliko dugo wiringPi schatch prezivi da li se konstantno vrti u pozadini ili se nekad ugasi
+
+	postoji li način da prosljeđujemo komande u wiring
+
+	postoji li wiringWebServer (ideja iz verzije 1)
+
+//otkrili smo čitajući:
+
+	wiringPi zadržava state kad se komanda executa iz shell terminala
+
+	wiringPi echos to terminal the output of commands(usefull for pin state reading)
+
+	wiringPi se moze zovnuti iz PHP <3
+
+// potvrdili smo experimentom:
+
+	sad za sad ništa...
