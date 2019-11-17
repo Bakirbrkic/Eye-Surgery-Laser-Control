@@ -1,12 +1,15 @@
-.slidecontainer {
-  width: 100%; /* Width of the outside container */
+*{
+  font-size: xx-large;
+}
+
+
+.slideRow{
 }
 
 /* The slider itself */
 .slider {
   -webkit-appearance: none;  /* Override default CSS styles */
   appearance: none;
-  width: 100%; /* Full-width */
   height: 100px; /* Specified height */
   background: #d3d3d3; /* Grey background */
   outline: none; /* Remove outline */
@@ -35,4 +38,8 @@
   height: 25px; /* Slider handle height */
   background: #4CAF50; /* Green background */
   cursor: pointer; /* Cursor on hover */
+}
+.mainLightValueLbl{
+  padding-top: 15px;
+  font-size: 50px;
 }

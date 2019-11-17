@@ -4,15 +4,37 @@
 	<title>Oci</title>
 	<link rel="stylesheet" type="text/css" href="Demo.css">
 	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css" integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />
 </head>
 <body>
 
-	<div class="tabHeaders"></div>
+	<div class="tabHeaders container-fluid">
+		<div class="row">
+			<button class="btn btn-lg btn-primary col">Light</button>
+			<button class="btn btn-lg btn-info col">Diagnostics</button>
+			<button class="btn btn-lg btn-info col">Settings</button>
+		</div>
+	</div>
 	<div class="mainPage container-fluid">
-		<div class="slidecontainer col-12">
-			<h1>Light Intensity:</h1>
-  			<input type="range" min="1" max="100" value="50" class="slider mainLightSlider" id="myRange">
-  			<h1 class="mainLightValueLbl"></h1>
+		<div class="row">
+			<div class="controllBtns col-4">
+				<br>
+				<button class="btn btn-lg btn-danger col"> Switch Light </button>
+			</div>
+			<div class="graph col-8">
+				<img src="img/hist.png" width="50%">
+			</div>
+		</div>
+		<div class="row slideRow">
+			<div class="slidecontainer col-12">
+				<div class="row">
+					<h1>Light Intensity:</h1>
+				</div>
+				<div class="row">
+					<input type="range" min="1" max="100" value="0" class="slider mainLightSlider col-10" id="myRange">
+  					<div class="mainLightValueLbl col-2">0%</div>
+				</div>
+			</div>
 		</div>
 	</div>
 
