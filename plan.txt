@@ -44,3 +44,6 @@ Embedded software:
 // potvrdili smo experimentom:
 
 	sad za sad ništa...
+
+// za uraditi
+	napraviti hard copy u kojem memo specificirati koji pinovi ce biti koristeni odluciti malo kako cemo poredati zice

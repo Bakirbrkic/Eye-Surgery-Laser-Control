@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Oci</title>
+	<link rel="stylesheet" type="text/css" href="Demo.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+</head>
+<body>
+
+	<div class="tabHeaders"></div>
+	<div class="mainPage container-fluid">
+		<div class="slidecontainer col-12">
+			<h1>Light Intensity:</h1>
+  			<input type="range" min="1" max="100" value="50" class="slider mainLightSlider" id="myRange">
+  			<h1 class="mainLightValueLbl"></h1>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="js/jq.js"></script>
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+	<script type="text/javascript">
+		$(".mainLightSlider").change(function () {
+			$(".mainLightValueLbl").html($(".mainLightSlider").val() + "%");
+		})
+	</script>
+</body>
+</html>
