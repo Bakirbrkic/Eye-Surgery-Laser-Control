@@ -1,9 +1,47 @@
 *{
-  font-size: xx-large;
+  font-size: large;
 }
 
+.tabHeaders btn{
+  border-radius: 0px!important;
+}
 
-.slideRow{
+.mainPage{
+  padding-top: 2vh;
+}
+
+.controlBtns{
+  text-align: center;
+}
+.yellowLightBtn{
+  padding: 10px;
+  height: 25vh;
+  width: 30vh!important;
+}
+
+.yellowLightBtn.active{
+  background-color: #d3d3d3!important;
+}
+
+.blueLightBtn{
+  margin-top: 5vh;
+  padding: 6vh 10px 10px;
+  height: 10vh;
+  width: 30vh;
+}
+.blueLightBtn.active{
+   background-color: #d3d3d3!important;
+ }
+
+.graph{
+  background-color: grey;
+  height: 40vh;
+  background-image: url("../img/hist.png");
+  background-size: contain;
+}
+
+.sliderRow *{
+  padding: 0px!important;
 }
 
 /* The slider itself */
@@ -29,7 +67,7 @@
   appearance: none;
   width: 100px; /* Set a specific slider handle width */
   height: 100px; /* Slider handle height */
-  background: #4CAF50; /* Green background */
+  background: #007bff; /* Green background */
   cursor: pointer; /* Cursor on hover */
 }
 
@@ -42,4 +80,5 @@
 .mainLightValueLbl{
   padding-top: 15px;
   font-size: 50px;
+  text-align: center;
 }
