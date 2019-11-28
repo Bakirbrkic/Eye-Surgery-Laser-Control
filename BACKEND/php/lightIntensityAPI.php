@@ -6,6 +6,10 @@
 			
 		shell_exec("gpio mode 24 pwm");
 		shell_exec("gpio mode 25 output");
+		
+		shell_exec("gpio pwm 24 0");
+		shell_exec("gpio write 25 0");
+		
 		$lightAmount = 0;
 		echo "pins set to pwm and output light amount 0";
 
