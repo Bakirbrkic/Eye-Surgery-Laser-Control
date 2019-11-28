@@ -25,6 +25,8 @@ function setup() {
    	});
 }
 
+setup();
+
 function switchBlue(power) {
 	$.ajax({
    		url:"../BACKEND/php/lightIntensityAPI.php?task=blue&power="+power,
