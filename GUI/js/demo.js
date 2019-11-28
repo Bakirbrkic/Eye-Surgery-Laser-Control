@@ -69,6 +69,16 @@ $(".controlBtns > .btn").click(function () {
        	$(this).addClass("active");
        	if ($(this).hasClass("yellowLightBtn")) {
        		mainLightSwitch = 0;
+          $.ajax({
+        url:"../BACKEND/php/lightIntensityAPI.php?task=dim&amount=" + 0,
+        type: 'GET',
+        success: function (data) {
+          console.log(data);
+        },
+        error: function () {
+          
+        }
+      });
        	} else {
        		blueLightSwitch = 0;
        		switchBlue(blueLightSwitch);
