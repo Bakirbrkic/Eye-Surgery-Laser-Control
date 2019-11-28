@@ -62,6 +62,15 @@ $(".controlBtns > .btn").click(function () {
        	$(this).removeClass("active");
        	if ($(this).hasClass("yellowLightBtn")) {
        		mainLightSwitch = 1;
+          $.ajax({
+            url:"../BACKEND/php/lightIntensityAPI.php?task=dim&amount=" + $(".mainLightSlider").val(),
+            type: 'GET',
+            success: function (data) {
+              console.log(data);
+            },
+            error: function () {     
+            }
+          });
        	} else {
        		blueLightSwitch = 1;
        		switchBlue(blueLightSwitch);
@@ -76,10 +85,8 @@ $(".controlBtns > .btn").click(function () {
               success: function (data) {
                 console.log(data);
               },
-              error: function () {
-        
-      }
-    });
+              error: function () {              }
+            });
        	} else {
        		blueLightSwitch = 0;
        		switchBlue(blueLightSwitch);
