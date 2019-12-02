@@ -41,6 +41,8 @@ function switchBlue(power) {
 }
 
 
+
+
 $(".mainLightSlider").change(function () {
     $(".mainLightValueLbl").html($(".mainLightSlider").val() + "%");
     if (mainLightSwitch) {
@@ -71,6 +73,22 @@ $(".controlBtns > .btn").click(function () {
             error: function () {     
             }
           });
+          
+          $(function(){
+              $('#bar1').barfiller({
+                // color of bar
+                barColor: '#16b597',
+                // shows a tooltip
+                tooltip: true,
+                // duration in ms
+                duration: 1000,
+                // re-animate on resize
+                animateOnResize: true,
+                // custom symbol
+                symbol: "%"
+              });
+            });
+            $('#bar1').barfiller();
        	} else {
        		blueLightSwitch = 1;
        		switchBlue(blueLightSwitch);
@@ -95,3 +113,4 @@ $(".controlBtns > .btn").click(function () {
    	console.log("ml: " + mainLightSwitch);
    	console.log("bl: " + blueLightSwitch);
 });
+     
