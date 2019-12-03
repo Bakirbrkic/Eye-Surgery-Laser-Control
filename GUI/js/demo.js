@@ -73,22 +73,6 @@ $(".controlBtns > .btn").click(function () {
             error: function () {     
             }
           });
-          
-          $(function(){
-              $('#bar1').barfiller({
-                // color of bar
-                barColor: '#16b597',
-                // shows a tooltip
-                tooltip: true,
-                // duration in ms
-                duration: 1000,
-                // re-animate on resize
-                animateOnResize: true,
-                // custom symbol
-                symbol: "%"
-              });
-            });
-            $('#bar1').barfiller();
        	} else {
        		blueLightSwitch = 1;
        		switchBlue(blueLightSwitch);
@@ -113,4 +97,58 @@ $(".controlBtns > .btn").click(function () {
    	console.log("ml: " + mainLightSwitch);
    	console.log("bl: " + blueLightSwitch);
 });
-     
+
+var a = setInterval(function(){
+  $(function(){
+    var p = $("#bar1 .fill").attr("data-percentage");
+    p = parseInt(p);
+    p=p+1;
+    $("#bar1 .fill").attr("data-percentage", p);
+             // $("#bar1 .fill").attr("data-percentage","")
+           if(p>0 && p<50){
+                $('#bar1').barfiller({
+                  // color of bar
+                  barColor: '#16b597',
+                  // shows a tooltip
+                  tooltip: true,
+                  // duration in ms
+                  duration: 1000,
+                  // re-animate on resize
+                  animateOnResize: true,
+                  // custom symbol
+                  symbol: "%"
+                });
+              }
+              if(p>=50 && p<75){
+                $('#bar1').barfiller({
+                  // color of bar
+                  barColor: '#ffb700',
+                  // shows a tooltip
+                  tooltip: true,
+                  // duration in ms
+                  duration: 1000,
+                  // re-animate on resize
+                  animateOnResize: true,
+                  // custom symbol
+                  symbol: "%"
+                });
+              }
+              if(p>=75 && p<=100){
+                $('#bar1').barfiller({
+                  // color of bar
+                  barColor: '#d3191c',
+                  // shows a tooltip
+                  tooltip: true,
+                  // duration in ms
+                  duration: 1000,
+                  // re-animate on resize
+                  animateOnResize: true,
+                  // custom symbol
+                  symbol: "%"
+                });
+              }
+
+
+            });
+            //$('#bar1').barfiller();
+},1000);
