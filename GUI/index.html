@@ -10,31 +10,31 @@
 
 	<div class="tabHeaders container-fluid">
 		<div class="row">
-			<button class="btn btn-lg btn-primary col">Light</button>
-			<button class="btn btn-lg btn-info col">Diagnostics</button>
-			<button class="btn btn-lg btn-info col">Settings</button>
+			<a class="col" href="index.html"><button class="btn btn-lg btn-primary col">Light</button></a>
+			<a  class="col" href="diagnostics.html"><button class="btn btn-lg btn-info col">Diagnostics</button></a>
+			<a class="col" href=""><button class="btn btn-lg btn-info col">Settings</button></a>
 		</div>
 	</div>
 	<div class="mainPage container-fluid">
 		<div class="container col-12">
-			<div class="row">
-				<div class="controlBtns col-4">
-					<button class="btn btn-primary  yellowLightBtn active"> Main Light On/Off </button>
-					<br>
-					<button class="btn btn-primary  blueLightBtn active"> Blue Light On/Off </button>
-				</div>
-				<div id="bar1" class="barfiller col-7">
+			<div class="row controlBtns">
+					<button class="btn btn-primary col-2 yellowLightBtn active"> Main Light On/Off </button>
+					<div class="col-1"></div>
+					<div id="bar1" class="barfiller col-6">
 				  <div class="tipWrap">
 				  <span class="tip"></span>
 				  </div>
 				  <span class="fill" data-percentage="0"></span>
 				  	<h2>Toxicity index</h2>
-
 				</div>
+				<div class="col-1"></div>
+					<button class="btn btn-primary col-2 blueLightBtn active"> Blue Light On/Off </button>
+				</div>
+				
 			</div>
 		</div>
 
-		<div class="container col-12">
+		<div class="container Intensity col-12">
 			<div class="row">
 				<h3 class="offset-1">Light Intensity:</h3>
 			</div>
