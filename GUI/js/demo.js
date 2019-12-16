@@ -101,12 +101,78 @@ $(".controlBtns > .btn").click(function () {
 var add = 0;
 var interval = 0
 
+var a
+
+function intervalTimer() {
+  a = setInterval(function () {
+    /* $(function () { */
+    console.log(interval)
+    var p = $("#bar1 .fill").attr("data-percentage");
+    p = parseInt(p)
+    p = p + add;
+    $("#bar1 .fill").attr("data-percentage", p);
+    // $("#bar1 .fill").attr("data-percentage","")
+    if (p > 0 && p < 50) {
+      $('#bar1').barfiller({
+        // color of bar
+        barColor: '#16b597',
+        // shows a tooltip
+        tooltip: true,
+        // duration in ms
+        duration: 1000,
+        // re-animate on resize
+        animateOnResize: true,
+        // custom symbol
+        symbol: "%"
+      });
+    }
+    if (p >= 50 && p < 75) {
+      $('#bar1').barfiller({
+        // color of bar
+        barColor: '#ffb700',
+        // shows a tooltip
+        tooltip: true,
+        // duration in ms
+        duration: 1000,
+        // re-animate on resize
+        animateOnResize: true,
+        // custom symbol
+        symbol: "%"
+      });
+    }
+    if (p >= 75 && p <= 100) {
+      $('#bar1').barfiller({
+        // color of bar
+        barColor: '#d3191c',
+        // shows a tooltip
+        tooltip: true,
+        // duration in ms
+        duration: 1000,
+        // re-animate on resize
+        animateOnResize: true,
+        // custom symbol
+        symbol: "%"
+      });
+    }
+
+
+    /* }); */
+    //$('#bar1').barfiller();
+  }, interval);
+}
+
 function yellowLightBtn() {
+  clearInterval(a);
   if (!$('.yellowLightBtn').hasClass("active")) {
+    clearInterval(a);
     var html = $('.mainLightValueLbl').html()
     add = 0
-    add += (parseInt(html) / 10) //100 => 10, 5 => 0.5 
-    add = Math.round(add); // preko .5 zaokruzi na broj vise...5.5 => 6 / 5.2 => 5
+    interval = 0
+    clearInterval(a);
+    console.log("na pocetku add " + add)
+    add += (parseInt(html) / 10)
+    add = Math.round(add)
+    console.log("poslije add " + add)
     if (add == 1) {
       interval = 10000
     } else if (add == 2) {
@@ -128,63 +194,11 @@ function yellowLightBtn() {
     } else if (add == 10) {
       interval = 1000
     }
-    console.log("add"+add)
-    /* var a =  */
-    setInterval(function () {
-      $(function () {
-        console.log("interval" + interval)
-        var p = $("#bar1 .fill").attr("data-percentage");
-        p = parseInt(p)
-        p = p + add;
-        $("#bar1 .fill").attr("data-percentage", p);
-        // $("#bar1 .fill").attr("data-percentage","")
-        if (p > 0 && p < 50) {
-          $('#bar1').barfiller({
-            // color of bar
-            barColor: '#16b597',
-            // shows a tooltip
-            tooltip: true,
-            // duration in ms
-            duration: 1000,
-            // re-animate on resize
-            animateOnResize: true,
-            // custom symbol
-            symbol: "%"
-          });
-        }
-        if (p >= 50 && p < 75) {
-          $('#bar1').barfiller({
-            // color of bar
-            barColor: '#ffb700',
-            // shows a tooltip
-            tooltip: true,
-            // duration in ms
-            duration: 1000,
-            // re-animate on resize
-            animateOnResize: true,
-            // custom symbol
-            symbol: "%"
-          });
-        }
-        if (p >= 75 && p <= 100) {
-          $('#bar1').barfiller({
-            // color of bar
-            barColor: '#d3191c',
-            // shows a tooltip
-            tooltip: true,
-            // duration in ms
-            duration: 1000,
-            // re-animate on resize
-            animateOnResize: true,
-            // custom symbol
-            symbol: "%"
-          });
-        }
+    console.log(add)
+    if (interval != 0) {
+      intervalTimer()
+    }
 
-
-      });
-      //$('#bar1').barfiller();
-    }, interval);
   } else {
     add = 0
   }
@@ -196,9 +210,11 @@ function yellowLightBtn() {
 yellowLightBtn()
 
 $('.yellowLightBtn').click(function () {
+  clearInterval(a);
   yellowLightBtn()
 })
 
 $('#myRange').change(function () {
+  clearInterval(a);
   yellowLightBtn()
 })
