@@ -128,11 +128,11 @@ function yellowLightBtn() {
     } else if (add == 10) {
       interval = 1000
     }
-    console.log(add)
+    console.log("add"+add)
     /* var a =  */
     setInterval(function () {
       $(function () {
-        console.log(interval)
+        console.log("interval" + interval)
         var p = $("#bar1 .fill").attr("data-percentage");
         p = parseInt(p)
         p = p + add;
