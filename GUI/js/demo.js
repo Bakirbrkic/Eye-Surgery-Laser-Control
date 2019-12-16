@@ -109,7 +109,7 @@ function intervalTimer() {
     console.log(interval)
     var p = $("#bar1 .fill").attr("data-percentage");
     p = parseInt(p)
-    p = p + add;
+    p = p + 1;
     $("#bar1 .fill").attr("data-percentage", p);
     // $("#bar1 .fill").attr("data-percentage","")
     if (p > 0 && p < 50) {
