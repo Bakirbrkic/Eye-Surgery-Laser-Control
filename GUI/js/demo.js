@@ -155,10 +155,6 @@ function intervalTimer() {
         symbol: "%"
       });
     }
-
-
-    /* }); */
-    //$('#bar1').barfiller();
   }, interval);
 }
 
@@ -206,16 +202,51 @@ function yellowLightBtn() {
 }
 
 
-
-
 yellowLightBtn()
 
 $('.yellowLightBtn').click(function () {
   clearInterval(a);
+  if(!(blueLightSwitch)) {
+    console.log("stiglo")
   yellowLightBtn()
+  }
+  else
+    blueLightBtn()
 })
 
 $('#myRange').change(function () {
   clearInterval(a);
-  yellowLightBtn()
+  if(!(blueLightSwitch)) {
+    yellowLightBtn()
+  }
+  else
+    blueLightBtn()
 })
+
+
+function blueLightBtn() {
+  clearInterval(a);
+  if (blueLightSwitch) {
+    //clearInterval(a);
+    //var html = $('.mainLightValueLbl').html()
+    //add = 20
+    interval = 0
+    clearInterval(a);
+    interval=500;
+    if (interval != 0) {
+      intervalTimer()
+    }
+  } 
+}
+
+
+blueLightBtn()
+
+$('.blueLightBtn').click(function () {
+  clearInterval(a);
+  blueLightBtn();
+  if(!(blueLightSwitch)) {
+   yellowLightBtn(); 
+  }
+})
+
