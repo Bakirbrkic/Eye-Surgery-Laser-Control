@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Oci</title>
+	<link rel="stylesheet" type="text/css" href="css/Demo.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.css"
+		integrity="sha256-46qynGAkLSFpVbEBog43gvNhfrOj+BmwXdxFgVK/Kvc=" crossorigin="anonymous" />
+</head>
+
+<body>
+
+	<div class="tabHeaders container-fluid">
+		<div class="row">
+			<a class="col" href="index.html"><button class="btn btn-lg btn-info col ">Light</button></a>
+			<a class="col" href="diagnostics.html"><button class="btn btn-lg btn-info col">Diagnostics</button></a>
+			<a class="col" href="settings.html"><button class="btn btn-lg btn-primary col">Settings</button></a>
+			<a class="col" href=""><button class="btn btn-lg btn-secondary col">Logged in: <span class="userNameLbl"></span></button></a>
+		</div>
+	</div>
+	<div class="mainPage container-fluid">
+		<h1>Username: <span class="userNameLbl"></span> <button class="btn btn-danger pull-right" data-toggle="modal" data-target="#exampleModal">Change User</button></h1>	
+
+		<h3>Time of last operation: <span class="lastTime"></span> min.</h3>
+		<h3>Total use time: <span class="totalTime"></span> min.</h3>
+	</div>
+
+
+	<div class="modal" tabindex="-1" role="dialog" id="exampleModal">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title">Change User</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <div class="modal-body">
+		        <ul class="usersList">
+		        	
+		        </ul>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+
+
+	<script type="text/javascript" src="js/jq.js"></script>
+	<script type="text/javascript" src="js/bootstrap.js"></script>
+	<script src="js/jquery.barfiller.js"></script>
+	<script type="text/javascript" src="js/demo.js"></script>
+	<script type="text/javascript">
+		$.ajax()
+	</script>
+
+
+</body>
+
+</html>
