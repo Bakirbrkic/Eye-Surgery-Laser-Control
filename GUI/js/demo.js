@@ -74,8 +74,12 @@ $(".controlBtns > .btn").click(function () {
         error: function () {}
       });
     } else {
-      blueLightSwitch = 1;
-      switchBlue(blueLightSwitch);
+      if(mainLightSwitch){
+        blueLightSwitch = 1;
+        switchBlue(blueLightSwitch);
+      } else {
+        $(this).addClass("active");
+      }
     }
   } else {
     $(this).addClass("active");
@@ -90,8 +94,12 @@ $(".controlBtns > .btn").click(function () {
         error: function () {}
       });
     } else {
-      blueLightSwitch = 0;
-      switchBlue(blueLightSwitch);
+      if(mainLightSwitch){
+        blueLightSwitch = 0;
+        switchBlue(blueLightSwitch);
+      } else {
+        $(this).addClass("active");
+      }
     }
   }
   console.log("ml: " + mainLightSwitch);
@@ -243,10 +251,12 @@ function blueLightBtn() {
 blueLightBtn()
 
 $('.blueLightBtn').click(function () {
-  clearInterval(a);
-  blueLightBtn();
-  if(!(blueLightSwitch)) {
-   yellowLightBtn(); 
+  if(mainLightSwitch){
+    clearInterval(a);
+    blueLightBtn();
+    if(!(blueLightSwitch)) {
+     yellowLightBtn(); 
+    }
   }
 })
 

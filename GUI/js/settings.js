@@ -2,6 +2,7 @@ var profiles = [];
 var curentUser;
 var userTimer;
 var userDuration = 0;
+var deviceLife;
 
 //log in user
 function changeUser(fname) {
@@ -24,16 +25,31 @@ function changeUser(fname) {
 }
 
 //display curent user information in a page
-function loadUser() {
+function loadUserandDeviceInfo() {
+	//handle user
 	if (curentUser == undefined) {
 		curentUser = JSON.parse(window.localStorage.getItem("curentUser"));
 		$(".userNameLbl").html(curentUser.name.toUpperCase());
 		$(".lastTime").html(Math.floor(parseInt(curentUser.lastTime)/3600) + "h " + Math.floor(parseInt(curentUser.lastTime)%3600/60) + "min " + Math.floor(parseInt(curentUser.lastTime)%3600%60) + "s");
 		$(".totalTime").html(Math.floor(parseInt(curentUser.totalTime)/3600) + "h " + Math.floor(parseInt(curentUser.totalTime)%3600/60) + "min " + Math.floor(parseInt(curentUser.totalTime)%3600%60) + "s");
 	}
+	//handle device lifetime
+	$.ajax({
+		url: "../BACKEND/php/time.php?task=get",
+		type: 'GET',
+		success: function (data) {
+			deviceLife = JSON.parse(data).lifeTime;
+			window.localStorage.setItem("deviceLife", deviceLife);
+			if (window.location.pathname.indexOf("diagnostics.html") != -1) {
+				$(".lifeTimeTimerLbl").html(Math.floor(deviceLife/3600) + ":" + Math.floor(deviceLife%3600/60) + ":" + Math.floor(deviceLife%3600%60));
+			}
+		},
+		error: function () {
+
+		}
+	});
 }
 
-//to do
 function createUser(fname) {
 	$.ajax({
 		url: "../BACKEND/php/profileManager.php?task=register&fname="+fname,
@@ -70,6 +86,19 @@ function removeUser(fname) {
 		type: 'GET',
 		success: function (data) {
 			response = JSON.parse(data);
+		},
+		error: function () {
+
+		}
+	});
+}
+
+function updateLifeTime(t) {
+	$.ajax({
+		url: "../BACKEND/php/time.php?task=set&ftime="+t,
+		type: 'GET',
+		success: function (data) {
+			console.log(data);
 		},
 		error: function () {
 
@@ -121,8 +150,9 @@ if (window.location.pathname.indexOf("settings.html") != -1) {
 		location.reload();
 	})
 }
+
 //load and display information of curent user
-loadUser();
+loadUserandDeviceInfo();
 
 if (window.location.pathname.indexOf("index.html") != -1) {
 	$('.yellowLightBtn').click(function () {
@@ -133,12 +163,25 @@ if (window.location.pathname.indexOf("index.html") != -1) {
 				userDuration += 1;
 				curentUser.lastTime = userDuration;
 				curentUser.totalTime += 1;
+				deviceLife += 1;
 				window.localStorage.setItem("curentUser", JSON.stringify(curentUser));
+				window.localStorage.setItem("deviceLife", deviceLife);
+				$(".opTimeDurationLbl").html(Math.floor(userDuration/3600) + ":" + Math.floor(userDuration%3600/60) + ":" + Math.floor(userDuration%3600%60))
 			}, 1000);
 		} else {
 			console.log("settings says: " + !mainLightSwitch);
 			clearInterval(userTimer);
 			saveCurentUser(curentUser.name);
+			updateLifeTime(deviceLife);
+		}
+	})
+}
+
+if (window.location.pathname.indexOf("diagnostics.html") != -1) {
+	$(".restartLife").click(function () {
+		var da = prompt("to restart timer type in 'RESTART'");
+		if (da = "RESTART") {
+			updateLifeTime(0);
 		}
 	})
 }
