@@ -1,5 +1,7 @@
 var profiles = [];
 var curentUser;
+var userTimer;
+var userDuration = 0;
 
 //log in user
 function changeUser(fname) {
@@ -13,6 +15,7 @@ function changeUser(fname) {
 			$(".userNameLbl").html(curentUser.name.toUpperCase());
 			$(".lastTime").html(curentUser.lastTime);
 			$(".totalTime").html(curentUser.totalTime);
+			location.reload();
 		},
 		error: function () {
 
@@ -25,24 +28,53 @@ function loadUser() {
 	if (curentUser == undefined) {
 		curentUser = JSON.parse(window.localStorage.getItem("curentUser"));
 		$(".userNameLbl").html(curentUser.name.toUpperCase());
-		$(".lastTime").html(curentUser.lastTime);
-		$(".totalTime").html(curentUser.totalTime);
+		$(".lastTime").html(Math.floor(parseInt(curentUser.lastTime)/3600) + "h " + Math.floor(parseInt(curentUser.lastTime)%3600/60) + "min " + Math.floor(parseInt(curentUser.lastTime)%3600%60) + "s");
+		$(".totalTime").html(Math.floor(parseInt(curentUser.totalTime)/3600) + "h " + Math.floor(parseInt(curentUser.totalTime)%3600/60) + "min " + Math.floor(parseInt(curentUser.totalTime)%3600%60) + "s");
 	}
 }
 
 //to do
-function createUser(argument) {
-	// body...
+function createUser(fname) {
+	$.ajax({
+		url: "../BACKEND/php/profileManager.php?task=register&fname="+fname,
+		type: 'GET',
+		success: function (data) {
+			var response = JSON.parse(data);
+			alert(response.msg);
+		},
+		error: function () {
+
+		}
+	});
 }
 
-//call every second (toxicity timeinterval) to update time of use of the curent user
-function updateCurentUser(argument) {
-	// body...
-}
 
 //call when lamp is turned off (op finished), to send data to backend
-function saveCurentUser(argument) {
-	// body...
+function saveCurentUser(fname) {
+	$.ajax({
+		url: "../BACKEND/php/profileManager.php?task=update&fname="+fname+"&fdata="+JSON.stringify(curentUser),
+		type: 'GET',
+		success: function (data) {
+			console.log("Settings says: " + JSON.parse(data).msg);
+		},
+		error: function () {
+
+		}
+	});	
+}
+
+function removeUser(fname) {
+	var response = {};
+	$.ajax({
+		url: "../BACKEND/php/profileManager.php?task=remove&fname="+fname,
+		type: 'GET',
+		success: function (data) {
+			response = JSON.parse(data);
+		},
+		error: function () {
+
+		}
+	});
 }
 
 //do this only if you are on settings page
@@ -57,11 +89,22 @@ if (window.location.pathname.indexOf("settings.html") != -1) {
 			console.log(profiles);
 			for (var i = profiles.length - 1; i >= 0; i--) {
 
-				$(".usersList").append('<li class="selectUserBtn" data-fname="' + profiles[i] + '">' + profiles[i] + "</li>");
+				$(".usersList").append('<div><button class="btn btn-secondary btn-lg selectUserBtn" data-fname="' + profiles[i] + '">' + profiles[i] + '</button> <button class="btn btn-danger btn-lg removeUserBtn" data-fname="' + profiles[i] + '"> X </button></div>');
 				
 				$(".selectUserBtn").click(function () {
 					changeUser($(this).attr("data-fname"));
+					//location.reload();
 				});
+
+				$(".removeUserBtn").click(function () {
+					removeUser($(this).attr("data-fname"));
+					if ($(this).attr("data-fname") == curentUser.name) {
+						curentUser = {};
+						window.localStorage.setItem("curentUser", "{}");
+					}
+					alert("User " + $(this).attr("data-fname") + " has been deleted");
+					location.reload();
+				})
 
 			}
 		},
@@ -69,6 +112,33 @@ if (window.location.pathname.indexOf("settings.html") != -1) {
 
 		}
 	});
+
+	$(".addUserBtn").click(function () {
+		var fname = prompt("Input profile name (no witespaces, all lowercase):");
+		fname = fname.replace(/\s/g,'');
+		fname = fname.toLowerCase();
+		createUser(fname);
+		location.reload();
+	})
 }
 //load and display information of curent user
 loadUser();
+
+if (window.location.pathname.indexOf("index.html") != -1) {
+	$('.yellowLightBtn').click(function () {
+		if(!(mainLightSwitch)) {
+			console.log("settings says: " + !mainLightSwitch);
+			//kase upali lampa
+			userTimer = setInterval(function () {
+				userDuration += 1;
+				curentUser.lastTime = userDuration;
+				curentUser.totalTime += 1;
+				window.localStorage.setItem("curentUser", JSON.stringify(curentUser));
+			}, 1000);
+		} else {
+			console.log("settings says: " + !mainLightSwitch);
+			clearInterval(userTimer);
+			saveCurentUser(curentUser.name);
+		}
+	})
+}

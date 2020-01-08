@@ -52,7 +52,8 @@
 		}
 
 	} else if ($_REQUEST['task'] == "remove") {
-		# code...
+		unlink("../users/".$_REQUEST['fname']);
+		echo '{"msg":"Profile '.$_REQUEST['fname'].' has been deleted"}';
 	}
 ?>
 
