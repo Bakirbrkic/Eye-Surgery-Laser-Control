@@ -20,8 +20,8 @@
  					<div class="panel-heading"> LED 1 </div>
  					<div class="panel-body">
  						 <div class="led-box">
-						    <div class="led-green"></div>
-						    <p><b>90%</b></p>
+						    <div id="lightStatusColor1" ></div>
+						    <p><b class="lightStatusLbl">--</b></p>
 						 </div>
  					</div>
  				</div>
@@ -31,8 +31,8 @@
  					</div>
  					<div class="panel-body">
  						 <div class="led-box">
-						    <div class="led-green"></div>
-						    <p><b>88%</b></p>
+						    <div id="lightStatusColor2" ></div>
+						    <p><b class="lightStatusLbl">--</b></p>
 						  </div>
  					</div>
  				</div>
@@ -42,8 +42,8 @@
  					</div>
  					<div class="panel-body">
  						 <div class="led-box">
-						    <div class="led-green"></div>
-						    <p><b>94%</b></p>
+						    <div id="lightStatusColor3" ></div>
+						    <p><b class="lightStatusLbl">--</b></p>
 						  </div>
  					</div>
  				</div>
@@ -53,8 +53,8 @@
  					</div>
  					<div class="panel-body">
  						 <div class="led-box">
-						    <div class="led-red"></div>
-						    <p><b>0%</b></p>
+						    <div id="lightStatusColor4" ></div>
+						    <p><b class="lightStatusLbl">--</b></p>
 						  </div>
  					</div>
  				</div>
@@ -64,13 +64,14 @@
  					</div>
  					<div class="panel-body">
  						 <div class="led-box">
-						    <div class="led-green"></div>
-						    <p><b>90%</b></p>
+						    <div id="lightStatusColor5" ></div>
+						    <p><b class="lightStatusLbl">--</b></p>
 						  </div>
  					</div>
  				</div>
  			</div>
  			<div class="row"><br><br></div>
+ 			<div class="row"><h5 class="lightDiag"></h5></div>
  			<div class="row">
  				<h3>This set of lights has been shining for: <span class="lifeTimeTimerLbl">0:0:0</span></h3>
  			</div>
@@ -81,6 +82,7 @@
 
 
 	<script type="text/javascript" src="js/jq.js"></script>
+	<script type="text/javascript" src="js/feedback.js"></script>
 	<script type="text/javascript" src="js/bootstrap.js"></script>
 	<script src="js/jquery.barfiller.js"></script>
 	<script type="text/javascript" src="js/settings.js"></script>

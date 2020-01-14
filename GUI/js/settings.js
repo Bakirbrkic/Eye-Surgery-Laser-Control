@@ -15,6 +15,7 @@ function changeUser(fname) {
 			window.localStorage.setItem("curentUser", JSON.stringify(curentUser));
 			$(".userNameLbl").html(curentUser.name.toUpperCase());
 			$(".lastTime").html(curentUser.lastTime);
+			$(".lastTox").html(curentUser.lastToxicity);
 			$(".totalTime").html(curentUser.totalTime);
 			location.reload();
 		},
@@ -30,6 +31,7 @@ function loadUserandDeviceInfo() {
 	if (curentUser == undefined) {
 		curentUser = JSON.parse(window.localStorage.getItem("curentUser"));
 		$(".userNameLbl").html(curentUser.name.toUpperCase());
+		$(".lastTox").html(curentUser.lastToxicity);
 		$(".lastTime").html(Math.floor(parseInt(curentUser.lastTime)/3600) + "h " + Math.floor(parseInt(curentUser.lastTime)%3600/60) + "min " + Math.floor(parseInt(curentUser.lastTime)%3600%60) + "s");
 		$(".totalTime").html(Math.floor(parseInt(curentUser.totalTime)/3600) + "h " + Math.floor(parseInt(curentUser.totalTime)%3600/60) + "min " + Math.floor(parseInt(curentUser.totalTime)%3600%60) + "s");
 	}
@@ -67,6 +69,7 @@ function createUser(fname) {
 
 //call when lamp is turned off (op finished), to send data to backend
 function saveCurentUser(fname) {
+	window.localStorage.setItem("curentUser", JSON.stringify(curentUser));
 	$.ajax({
 		url: "../BACKEND/php/profileManager.php?task=update&fname="+fname+"&fdata="+JSON.stringify(curentUser),
 		type: 'GET',
@@ -171,6 +174,7 @@ if (window.location.pathname.indexOf("index.html") != -1) {
 		} else {
 			console.log("settings says: " + !mainLightSwitch);
 			clearInterval(userTimer);
+			curentUser.lastToxicity = $(".fill").attr("data-percentage");
 			saveCurentUser(curentUser.name);
 			updateLifeTime(deviceLife);
 		}
@@ -180,8 +184,10 @@ if (window.location.pathname.indexOf("index.html") != -1) {
 if (window.location.pathname.indexOf("diagnostics.html") != -1) {
 	$(".restartLife").click(function () {
 		var da = prompt("to restart timer type in 'RESTART'");
-		if (da = "RESTART") {
+		if (da == "RESTART") {
 			updateLifeTime(0);
+		} else {
+			alert("counter will not be restarted");
 		}
 	})
 }
